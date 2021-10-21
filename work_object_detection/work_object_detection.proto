@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.routeguide";
+option java_outer_classname = "RouteGuideProto";
+option objc_class_prefix = "RTG";
+
+package workobjectdetection;
+
+service WorkObjectDetection {
+  rpc Predict(Image) returns (Detection) {}
+  rpc SplitAndPredict(Image) returns (Detections) {}
+}
+
+message Image {
+  string image = 1;
+  string date = 2;
+  bool debug = 3;
+}
+
+message Detection {
+  float accuracy = 1;
+  bool is_work = 2;
+}
+
+message Detections {
+  bool status = 1;
+  string error = 2;
+  float accuracy = 3;
+  bool is_work = 4;
+  repeated float all_accuracy = 5;
+  repeated bool all_is_work = 6;
+}
